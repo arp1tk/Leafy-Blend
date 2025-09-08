@@ -115,11 +115,7 @@ export default function ProductsPage() {
                   >
                     <Heart className={`h-4 w-4 ${wishlist.includes(product.id) ? "fill-red-500 text-red-500" : ""}`} />
                   </Button>
-                  {product.originalPrice > product.price && (
-                    <Badge className="absolute top-4 left-4 bg-destructive text-destructive-foreground">
-                      Save ₹{product.originalPrice - product.price}
-                    </Badge>
-                  )}
+                
                 </div>
 
                 <CardContent className="p-6 space-y-4">
@@ -133,7 +129,7 @@ export default function ProductsPage() {
                       <Star className="h-4 w-4 fill-primary text-primary" />
                       <span className="text-sm font-medium">{product.rating}</span>
                     </div>
-                    <span className="text-sm text-muted-foreground">({product.reviews} reviews)</span>
+                   
                   </div>
 
                   <div className="space-y-2">
@@ -152,9 +148,7 @@ export default function ProductsPage() {
                     <div className="space-y-1">
                       <div className="flex items-center space-x-2">
                         <span className="font-bold text-lg">₹{product.price}</span>
-                        {product.originalPrice > product.price && (
-                          <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
-                        )}
+                      
                       </div>
                     </div>
                     <Button size="sm" onClick={() => addToCart(product.id)} className="flex items-center space-x-2">

@@ -15,7 +15,7 @@ const products = {
     reviews: 0,
     description: "90 Day Miracle Hair Oil - Bhringraj, Amla, Hibiscus for Hairfall Control",
     challenge: "Take the 90-Day Challenge for Thicker | Smoother | Luscious hair",
-    image: "/herbal-hair-oil-bottle-natural-green-packaging.jpg",
+    image: "/product.png",
     benefits:
       "Blend of 26 herbs that promotes healthy scalp, smooth & silky hair and helps to strengthen the hair follicles.",
     ingredients: ["Bhringraj", "Amla", "Hibiscus", "Rosemary", "Fenugreek", "Coconut Oil"],
