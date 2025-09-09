@@ -1,12 +1,11 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Card, CardContent } from "@/components/ui/card"
-import { Leaf, Heart, Shield, Recycle } from "lucide-react"
-
+import { Leaf } from "lucide-react"
+import Image from "next/image"
 export default function AboutPage() {
   return (
     <div className="min-h-screen">
-    
+
 
       {/* Hero Section */}
       <section className="py-16 lg:py-24">
@@ -46,66 +45,94 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#394931]">Our Values</h2>
-            <p className="text-lg text-[#90997F] max-w-2xl mx-auto">The principles that guide everything we do</p>
+     <section className="py-12 lg:py-16 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <div className="text-center space-y-2 mb-10">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#394931]">Our Claims</h2>
+          <p className="text-lg text-[#90997F] max-w-xl mx-auto">
+            What makes our products pure and natural
+          </p>
+        </div>
+
+        {/* Claims Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 max-w-3xl mx-auto">
+          {/* Claim 1 */}
+          <div className="text-center space-y-3">
+            <div className="mx-auto w-20 h-20 flex items-center justify-center">
+              <Image
+                src="/organic.webp" 
+                alt="100% organic"
+                width={100}
+                height={100}
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-[#394931]">100% organic</h3>
+              <p className="text-[#90997F] text-sm">All Natural</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="text-center p-8 border-0 shadow-sm bg-white">
-              <CardContent className="space-y-4">
-                <div className="mx-auto w-16 h-16 bg-[#394931]/10 rounded-full flex items-center justify-center">
-                  <Leaf className="h-8 w-8 text-[#394931]" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold text-[#394931]">Purity</h3>
-                <p className="text-[#90997F] text-sm">
-                  We use only the finest natural ingredients, free from harmful chemicals and synthetic additives.
-                </p>
-              </CardContent>
-            </Card>
+          {/* Claim 2 */}
+          <div className="text-center space-y-3">
+            <div className="mx-auto w-20 h-20 flex items-center justify-center">
+              <Image
+                src="/nofragrance.webp"
+                alt="No artificial fragrance"
+                width={80}
+                height={80}
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-[#394931]">No artificial</h3>
+              <p className="text-[#90997F] text-sm">Fragrance</p>
+            </div>
+          </div>
 
-            <Card className="text-center p-8 border-0 shadow-sm bg-white">
-              <CardContent className="space-y-4">
-                <div className="mx-auto w-16 h-16 bg-[#90997F]/10 rounded-full flex items-center justify-center">
-                  <Shield className="h-8 w-8 text-[#90997F]" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold text-[#394931]">Transparency</h3>
-                <p className="text-[#90997F] text-sm">
-                  We believe in complete transparency about our ingredients, processes, and sourcing practices.
-                </p>
-              </CardContent>
-            </Card>
+          {/* Claim 3 */}
+          <div className="text-center space-y-3">
+            <div className="mx-auto w-20 h-20 flex items-center justify-center">
+              <Image
+                src="/noChemical.webp"
+                alt="No chemicals"
+                width={80}
+                height={80}
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-[#394931]">No chemicals</h3>
+              <p className="text-[#90997F] text-sm">Pure & Safe</p>
+            </div>
+          </div>
 
-            <Card className="text-center p-8 border-0 shadow-sm bg-white">
-              <CardContent className="space-y-4">
-                <div className="mx-auto w-16 h-16 bg-[#AFB59D]/10 rounded-full flex items-center justify-center">
-                  <Heart className="h-8 w-8 text-[#AFB59D]" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold text-[#394931]">Efficacy</h3>
-                <p className="text-[#90997F] text-sm">
-                  Our products are formulated to deliver real, visible results that you can see and feel.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center p-8 border-0 shadow-sm bg-white">
-              <CardContent className="space-y-4">
-                <div className="mx-auto w-16 h-16 bg-[#9EA99C]/10 rounded-full flex items-center justify-center">
-                  <Recycle className="h-8 w-8 text-[#9EA99C]" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold text-[#394931]">Sustainability</h3>
-                <p className="text-[#90997F] text-sm">
-                  We're committed to sustainable practices and eco-friendly packaging to protect our planet.
-                </p>
-              </CardContent>
-            </Card>
+          {/* Claim 4 */}
+          <div className="text-center space-y-3">
+            <div className="mx-auto w-20 h-20 flex items-center justify-center">
+              <Image
+                src="/mineral.webp"
+                alt="No mineral oils"
+                width={80}
+                height={80}
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div>
+              <h3 className="font-serif text-lg font-semibold text-[#394931]">No mineral</h3>
+              <p className="text-[#90997F] text-sm">Oils</p>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-    
+     
 
       <Footer />
     </div>

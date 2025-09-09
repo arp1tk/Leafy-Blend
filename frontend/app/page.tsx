@@ -4,32 +4,57 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Star } from "lucide-react"
 import Link from "next/link"
-
+import Image from "next/image"
+import CountUp from "@/components/countUp"
 export default function HomePage() {
   return (
     <div className="min-h-screen">
   
 
-      <section className="relative py-32 lg:py-40 xl:py-48">
-        <div className="container mx-auto px-6 lg:px-8 xl:px-12">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.85] tracking-tight">
-              Rediscover Your Hair's <span className="text-[#394931]">Natural Strength</span>
-            </h1>
-            <p className="text-lg md:text-xl text-[#90997F] max-w-xl mx-auto text-pretty leading-relaxed">
-              It nourishes the scalp, strengthens hair roots, and supports healthy hair growth while calming the senses
-              with a soothing aroma.
-            </p>
-            <Button
-              size="lg"
-              className="text-lg px-12 py-6 rounded-full font-medium bg-[#394931] hover:bg-[#394931]/90"
-              asChild
-            >
-              <Link href="/products">Shop Now</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+  <section className="relative py-28 lg:py-36 xl:py-44">
+  {/* Background Image */}
+  <Image
+    src="/hero1.png"
+    alt="Natural herbal hair oil background"
+    fill
+    priority
+    className="object-cover object-center"
+  />
+
+  {/* Subtle dark overlay */}
+  <div className="absolute inset-0 bg-black/15" />
+
+  {/* Content */}
+  <div className="relative container mx-auto px-6 lg:px-8 xl:px-12">
+    <div className="max-w-3xl mx-auto text-center space-y-6">
+      {/* Tagline */}
+      <span className="text-sm md:text-base tracking-wide uppercase text-[#394931] font-medium">
+        Pure · Herbal · Natural
+      </span>
+
+      {/* Title */}
+      <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#1a1f16]">
+        Nature’s Secret for<br />Beautiful Hair
+      </h1>
+
+      {/* Subtitle */}
+      <p className="text-lg md:text-xl text-black max-w-xl mx-auto leading-relaxed">
+        Premium herbal oils crafted from 100% natural ingredients.
+      </p>
+
+      {/* CTA Button */}
+      <Button
+        size="lg"
+        className="text-lg px-10 py-5 rounded-full font-medium bg-[#394931] hover:bg-[#394931]/90 transition-all"
+        asChild
+      >
+        <Link href="/products">Shop Now</Link>
+      </Button>
+    </div>
+  </div>
+</section>
+
+
 
       <section className="py-20 lg:py-24 bg-[#D4D0B9]/20">
         <div className="container mx-auto px-6 lg:px-8 xl:px-12">
@@ -289,39 +314,52 @@ export default function HomePage() {
       </section>
 
       <section className="py-20 lg:py-24 bg-[#90997F]/20">
-        <div className="container mx-auto px-6 lg:px-8 xl:px-12">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div className="space-y-8">
-                <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#394931]">Results from the customers</h2>
-                <p className="text-[#394931]/80 text-lg leading-relaxed">
-                  At Leafy, we believe results speak louder than promises. From stronger roots to thicker strands, our
-                  customers have experienced real transformations with consistent use of our herbal hair oil. Every
-                  review is a story of restored confidence and natural beauty, proof that nature truly works when
-                  blended with care and tradition.
-                </p>
+      <div className="container mx-auto px-6 lg:px-8 xl:px-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left Side */}
+            <div className="space-y-8">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#394931]">Results from the customers</h2>
+              <p className="text-[#394931]/80 text-lg leading-relaxed">
+                At Leafy, we believe results speak louder than promises. From stronger roots to thicker strands, our
+                customers have experienced real transformations with consistent use of our herbal hair oil. Every
+                review is a story of restored confidence and natural beauty, proof that nature truly works when
+                blended with care and tradition.
+              </p>
+            </div>
+
+            {/* Right Side */}
+            <div className="grid grid-cols-1 gap-8">
+              {/* First Stat */}
+              <div className="text-center space-y-4">
+                <div className="text-6xl md:text-7xl font-bold text-[#394931] font-serif">
+                  <CountUp end={93} />%
+                </div>
+                <p className="text-[#394931]/70 text-lg">People have seen hair growth within 90 days</p>
               </div>
 
-              <div className="grid grid-cols-1 gap-8">
-                <div className="text-center space-y-4">
-                  <div className="text-6xl md:text-7xl font-bold text-[#394931] font-serif">93%</div>
-                  <p className="text-[#394931]/70 text-lg">People have seen hair growth within 90 days</p>
+              {/* Second Stat */}
+              <div className="text-center space-y-4">
+                <div className="text-6xl md:text-7xl font-bold text-[#394931] font-serif">
+                  <CountUp end={95} />%
                 </div>
+                <p className="text-[#394931]/70 text-lg">People said it smoothens the hair</p>
+              </div>
 
-                <div className="text-center space-y-4">
-                  <div className="text-6xl md:text-7xl font-bold text-[#394931] font-serif">95%</div>
-                  <p className="text-[#394931]/70 text-lg">People said it smoothens the hair</p>
+              {/* Third Stat */}
+              <div className="text-center space-y-4">
+                <div className="text-6xl md:text-7xl font-bold text-[#394931] font-serif">
+                  <CountUp end={4.86} isDecimal />
                 </div>
-
-                <div className="text-center space-y-4">
-                  <div className="text-6xl md:text-7xl font-bold text-[#394931] font-serif">4.86</div>
-                  <p className="text-[#394931]/70 text-lg">out of 5 Average rating</p>
-                </div>
+                <p className="text-[#394931]/70 text-lg">out of 5 Average rating</p>
               </div>
             </div>
+
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <Footer />
     </div>
