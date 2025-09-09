@@ -1,205 +1,155 @@
 "use client"
 
-import { useState } from "react"
-import { Header } from "@/components/header"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ShoppingCart, Heart, Star } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 
-const products = [
-  {
-    id: 1,
-    name: "Leafy Blend Herbal Hair Oil",
-    price: 599,
-    
-    image: "/product.png",
-    description: "Combats hair fall, stimulates growth, adds shine.",
-    benefits: ["Reduces hair fall by 93%", "Stimulates natural growth", "Adds natural shine", "Strengthens hair roots"],
-    ingredients: ["Amla", "Bhringraj", "Fenugreek", "Coconut Oil", "Lavender"],
-    rating: 4.8,
-    
-  },
-  {
-    id: 2,
-    name: "Leafy Blend Castor Oil",
-    price: 599,
-    image: "/",
-    description: "Thickens hair, strengthens roots, nourishes scalp.",
-    benefits: ["Thickens hair naturally", "Strengthens from roots", "Nourishes dry scalp", "Promotes eyebrow growth"],
-    ingredients: ["Pure Castor Oil", "Rosemary", "Peppermint", "Vitamin E"],
-    rating: 4.9,
-
-  },
-  {
-    id: 3,
-    name: "Leafy Blend Coconut Oil",
-    price: 599,
-   
-    image: "/",
-    description: "Deeply conditions, prevents protein loss, soothes scalp.",
-    benefits: ["Deep conditioning", "Prevents protein loss", "Soothes irritated scalp", "Natural UV protection"],
-    ingredients: ["Virgin Coconut Oil", "Curry Leaves", "Hibiscus", "Aloe Vera"],
-    rating: 4.7,
-
-  },
-]
+// Define a type for our product for better type-safety
+type Product = {
+  _id: string
+  name: string
+  slug: string
+  price: number
+  images: string[]
+  description: string
+  rating: {
+    average: number
+    totalReviews: number
+  }
+}
 
 export default function ProductsPage() {
-  const [cart, setCart] = useState<number[]>([])
-  const [wishlist, setWishlist] = useState<number[]>([])
-  
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
-  const addToCart = (productId: number) => {
-    setCart([...cart, productId])
-    toast(
- "Added to cart!"
-    
+  // Fetch products from the API when the component mounts
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/products/")
+        if (!response.ok) {
+          throw new Error("Failed to fetch products. Please try again later.")
+        }
+        const data = await response.json()
+        setProducts(data)
+      } catch (err: any) {
+        setError(err.message)
+        toast.error(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProducts()
+  }, [])
+
+  const addToBag = (productName: string) => {
+    toast.success(`${productName} added to bag!`)
+  }
+
+  const showProduct = (slug: string) => {
+    router.push(`/products/${slug}`)
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+      </div>
     )
   }
 
-  const toggleWishlist = (productId: number) => {
-    if (wishlist.includes(productId)) {
-      setWishlist(wishlist.filter((id) => id !== productId))
-      toast(
-         "Removed from wishlist",
-        
-      )
-    } else {
-      setWishlist([...wishlist, productId])
-      toast(
-         "Added to wishlist!"
-       
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-red-500">{error}</p>
+      </div>
     )
-    }
   }
 
   return (
-    <div className="min-h-screen">
-     
+    <div className="min-h-screen bg-white">
+      {/* Main Content Section */}
+      <main className="py-20 px-20">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <section className="pb-10">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-4xl mx-auto text-center space-y-8">
+                <h1 className="font-serif text-4xl md:text-5xl font-bold text-balance">
+                  Our <span className="text-primary">Natural Products</span>
+                </h1>
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                  Discover our range of premium natural hair oils, crafted with the finest ingredients for healthy,
+                  beautiful hair.
+                </p>
+              </div>
+            </div>
+          </section>
 
-      {/* Hero Section */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h1 className="font-serif text-4xl md:text-5xl font-bold text-balance">
-              Our <span className="text-primary">Natural Products</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Discover our range of premium natural hair oils, crafted with the finest ingredients for healthy,
-              beautiful hair.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Products Grid */}
-      <section className="py-16 lg:py-24 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Products Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
             {products.map((product) => (
-              <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <div className="relative aspect-square bg-gradient-to-br from-primary/5 to-primary/10 p-8 flex items-center justify-center">
+              <div
+                key={product._id}
+                className="group flex flex-col bg-background border border-gray-200 aspect-square"
+              >
+                {/* Image Section */}
+                <div className="relative flex-grow p-6 flex items-center justify-center overflow-hidden">
                   <img
-                    src={product.image || "/placeholder.svg"}
+                    src={product.images[0] || "/placeholder.svg"}
                     alt={product.name}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute top-4 right-4 bg-background/80 hover:bg-background"
-                    onClick={() => toggleWishlist(product.id)}
-                  >
-                    <Heart className={`h-4 w-4 ${wishlist.includes(product.id) ? "fill-red-500 text-red-500" : ""}`} />
-                  </Button>
-                
+                  {product.rating.average >= 4.8 && (
+                    <Badge
+                      variant="outline"
+                      className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-full"
+                    >
+                      TOP RATED
+                    </Badge>
+                  )}
                 </div>
 
-                <CardContent className="p-6 space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="font-serif text-xl font-semibold line-clamp-2">{product.name}</h3>
-                    <p className="text-muted-foreground text-sm line-clamp-2">{product.description}</p>
-                  </div>
+                {/* Content Section */}
+                <div className="p-4 border-t border-gray-200">
+                  <h3 className="font-medium text-gray-800 truncate">{product.name}</h3>
+                  <p className="text-sm text-gray-500">{product.description}</p>
+                </div>
 
-                  <div className="flex items-center space-x-2">
-                    <div className="flex items-center space-x-1">
-                      <Star className="h-4 w-4 fill-primary text-primary" />
-                      <span className="text-sm font-medium">{product.rating}</span>
-                    </div>
-                   
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-medium text-sm">Key Benefits:</h4>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      {product.benefits.slice(0, 2).map((benefit, index) => (
-                        <li key={index} className="flex items-center space-x-2">
-                          <div className="w-1 h-1 bg-primary rounded-full"></div>
-                          <span>{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-4 border-t">
-                    <div className="space-y-1">
-                      <div className="flex items-center space-x-2">
-                        <span className="font-bold text-lg">₹{product.price}</span>
-                      
-                      </div>
-                    </div>
-                    <Button size="sm" onClick={() => addToCart(product.id)} className="flex items-center space-x-2">
-                      <ShoppingCart className="h-4 w-4" />
-                      <span>Add to Cart</span>
+                {/* Action Section */}
+                <div className="p-4 border-t border-gray-200 col items-center justify-between gap-2">
+                  <span className="font-semibold text-lg text-gray-900">₹{product.price}</span>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => addToBag(product.name)}
+                      className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors rounded-none px-4"
+                    >
+                      ADD TO BAG
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => showProduct(product.slug)}
+                      className="bg-gray-900 text-white hover:bg-gray-800 transition-colors rounded-none px-4"
+                    >
+                      SHOW PRODUCT
                     </Button>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
+
+        
         </div>
-      </section>
-
-      {/* Why Choose Our Products */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold">Why Choose Leafy Blend?</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our commitment to quality and natural ingredients sets us apart
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                <span className="text-2xl font-bold text-primary">100%</span>
-              </div>
-              <h3 className="font-serif text-xl font-semibold">Natural & Vegan</h3>
-              <p className="text-muted-foreground">No synthetic chemicals, parabens, or animal-derived ingredients</p>
-            </div>
-
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 mx-auto bg-secondary/10 rounded-full flex items-center justify-center">
-                <span className="text-2xl font-bold text-secondary">10K+</span>
-              </div>
-              <h3 className="font-serif text-xl font-semibold">Happy Customers</h3>
-              <p className="text-muted-foreground">Thousands of satisfied customers with visible results</p>
-            </div>
-
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 mx-auto bg-accent/10 rounded-full flex items-center justify-center">
-                <span className="text-2xl font-bold text-accent">4.8★</span>
-              </div>
-              <h3 className="font-serif text-xl font-semibold">Excellent Reviews</h3>
-              <p className="text-muted-foreground">Consistently high ratings across all our products</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      </main>
 
       <Footer />
     </div>

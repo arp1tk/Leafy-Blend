@@ -7,7 +7,7 @@ import Image from "next/image"
 
 // Product data
 const products = {
-  "herbal-hair-oil": {
+  "leafy-blend-herbal-hair-oil": {
     id: 1,
     name: "Leafy Blend Herbal Hair Oil",
     price: 599,
