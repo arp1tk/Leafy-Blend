@@ -1,11 +1,13 @@
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Star } from "lucide-react"
+import { Star ,ChevronDown} from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import CountUp from "@/components/countUp"
+import { Badge } from "@/components/ui/badge"
 export default function HomePage() {
   return (
     <div className="min-h-screen">
@@ -56,96 +58,126 @@ export default function HomePage() {
 
 
 
-      <section className="py-20 lg:py-24 bg-[#D4D0B9]/20">
+
+
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-6 lg:px-8 xl:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
-            <Card className="group hover:shadow-xl transition-all duration-500 border-0 bg-white">
-              <div className="aspect-square bg-gradient-to-br from-[#AFB59D]/10 to-[#AFB59D]/20 p-8 flex items-center justify-center">
-                <img
-                  src="/product.png"
-                  alt="Leafy Blend Herbal Hair Oil"
-                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Product 1 - Herbal Hair Oil */}
+            <div className="group">
+              <div className="relative mb-6">
+              
+                <div className="aspect-square bg-gradient-to-br from-[#AFB59D]/5 to-[#AFB59D]/10 rounded-lg overflow-hidden">
+                  <img
+                    src="/herbal-hair-oil-bottle-natural-green-packaging.jpg"
+                    alt="Leafy Blend Herbal Hair Oil"
+                    className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
               </div>
-              <CardContent className="p-8 space-y-4">
-                <h3 className="font-serif text-2xl font-semibold text-[#394931]">Leafy Blend Herbal Hair Oil</h3>
-                <p className="text-[#90997F] leading-relaxed">
-                  A blend of 26 herbs that would help to strengthen the hair follicle and provide smooth & silky hair
-                </p>
-                <div className="flex items-center space-x-1 mb-2">
+
+              <div className="space-y-3">
+                <h3 className="font-serif text-xl font-semibold text-[#394931] leading-tight">
+                  Leafy Blend Herbal Hair Oil
+                </h3>
+
+                <div className="flex items-center space-x-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
-                  <span className="text-sm text-[#90997F] ml-2">(0)</span>
+                  <span className="text-sm text-[#90997F] ml-2">4.6</span>
                 </div>
-                <div className="flex items-center justify-between pt-4">
-                  <span className="font-bold text-2xl text-[#394931]">₹ 599.00</span>
-                  <Button className="rounded-full px-6 bg-[#394931] hover:bg-[#394931]/90" asChild>
-                    <Link href="/products/herbal-hair-oil">View product</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
 
-            <Card className="group hover:shadow-xl transition-all duration-500 border-0 bg-white">
-              <div className="aspect-square bg-gradient-to-br from-[#9EA99C]/10 to-[#9EA99C]/20 p-8 flex items-center justify-center">
-                <div className="w-full h-full bg-[#AFB59D]/20 rounded-lg flex items-center justify-center">
-                  <div className="text-center space-y-2">
-                    <div className="text-4xl">🌿</div>
-                    <div className="text-[#394931] font-serif text-lg">LeafyBlend</div>
-                    <div className="text-xs text-[#90997F]">CONCEPTS</div>
-                  </div>
+                <p className="text-[#394931] font-semibold">From ₹ 599.00</p>
+
+                <Button
+                  variant="outline"
+                  className="w-full rounded-full border-[#394931] text-[#394931] hover:bg-[#394931] hover:text-white transition-colors bg-transparent"
+                  asChild
+                >
+                  <Link href="/products/leafy-blend-herbal-hair-oil">QUICKSHOP</Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Product 2 - Castor Oil */}
+            <div className="group">
+              <div className="relative mb-6">
+              
+                <div className="aspect-square bg-gradient-to-br from-[#9EA99C]/5 to-[#9EA99C]/10 rounded-lg overflow-hidden">
+                  <img
+                    src="/natural-castor-oil-bottle-with-leafy-blend-brandin.jpg"
+                    alt="Leafy Blend Castor Oil"
+                    className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
               </div>
-              <CardContent className="p-8 space-y-4">
-                <h3 className="font-serif text-2xl font-semibold text-[#394931]">LeafyBlend castor oil</h3>
-                <p className="text-[#90997F] leading-relaxed">Natural wood pressed castor oil</p>
-                <div className="flex items-center space-x-1 mb-2">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-gray-300" />
-                  ))}
-                  <span className="text-sm text-[#90997F] ml-2">(0)</span>
-                </div>
-                <div className="flex items-center justify-between pt-4">
-                  <span className="font-bold text-2xl text-[#394931]">₹ 599.00</span>
-                  <Button className="rounded-full px-6 bg-[#394931] hover:bg-[#394931]/90" asChild>
-                    <Link href="/products/castor-oil">View product</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
 
-            <Card className="group hover:shadow-xl transition-all duration-500 border-0 bg-white">
-              <div className="aspect-square bg-gradient-to-br from-[#D4D0B9]/10 to-[#D4D0B9]/20 p-8 flex items-center justify-center">
-                <div className="w-full h-full bg-[#AFB59D]/20 rounded-lg flex items-center justify-center">
-                  <div className="text-center space-y-2">
-                    <div className="text-4xl">🌿</div>
-                    <div className="text-[#394931] font-serif text-lg">LeafyBlend</div>
-                    <div className="text-xs text-[#90997F]">CONCEPTS</div>
-                  </div>
-                </div>
-              </div>
-              <CardContent className="p-8 space-y-4">
-                <h3 className="font-serif text-2xl font-semibold text-[#394931]">Leafy Blend Coconut Oil</h3>
-                <p className="text-[#90997F] leading-relaxed">Natural wood pressed coconut oil</p>
-                <div className="flex items-center space-x-1 mb-2">
+              <div className="space-y-3">
+                <h3 className="font-serif text-xl font-semibold text-[#394931] leading-tight">
+                  Leafy Blend Castor Oil
+                </h3>
+
+                <div className="flex items-center space-x-1">
                   {[...Array(4)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
-                  <Star className="h-4 w-4 fill-yellow-400/50 text-yellow-400" />
-                  <span className="text-sm text-[#90997F] ml-2">(2)</span>
+                  <Star className="h-4 w-4 fill-yellow-400/30 text-yellow-400" />
+                  <span className="text-sm text-[#90997F] ml-2">4.5</span>
                 </div>
-                <div className="flex items-center justify-between pt-4">
-                  <span className="font-bold text-2xl text-[#394931]">₹ 599.00</span>
-                  <Button className="rounded-full px-6 bg-[#394931] hover:bg-[#394931]/90" asChild>
-                    <Link href="/products/coconut-oil">View product</Link>
-                  </Button>
+
+                <p className="text-[#394931] font-semibold">₹ 599.00</p>
+
+                <Button
+                  variant="outline"
+                  className="w-full rounded-full border-[#394931] text-[#394931] hover:bg-[#394931] hover:text-white transition-colors bg-transparent"
+                  asChild
+                >
+                  <Link href="/products/leafy-blend-castor-oil">QUICKSHOP</Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Product 3 - Coconut Oil */}
+            <div className="group">
+              <div className="relative mb-6">
+                <div className="aspect-square bg-gradient-to-br from-[#D4D0B9]/5 to-[#D4D0B9]/10 rounded-lg overflow-hidden">
+                  <img
+                    src="/natural-coconut-oil-bottle-with-leafy-blend-brandi.jpg"
+                    alt="Leafy Blend Coconut Oil"
+                    className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+
+              <div className="space-y-3">
+                <h3 className="font-serif text-xl font-semibold text-[#394931] leading-tight">
+                  Leafy Blend Coconut Oil
+                </h3>
+
+                <div className="flex items-center space-x-1">
+                  {[...Array(4)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                  <Star className="h-4 w-4 fill-yellow-400/30 text-yellow-400" />
+                  <span className="text-sm text-[#90997F] ml-2">4.6</span>
+                </div>
+
+                <p className="text-[#394931] font-semibold">₹ 599.00</p>
+
+                <Button
+                  variant="outline"
+                  className="w-full rounded-full border-[#394931] text-[#394931] hover:bg-[#394931] hover:text-white transition-colors bg-transparent"
+                  asChild
+                >
+                  <Link href="/products/leafy-blend-coconut-oil">QUICKSHOP</Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
 
       <section className="py-20 lg:py-24">
         <div className="container mx-auto px-6 lg:px-8 xl:px-12">

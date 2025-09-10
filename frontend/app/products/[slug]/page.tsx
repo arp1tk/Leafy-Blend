@@ -28,7 +28,7 @@ const products = {
       "Adds shine and smoothness",
     ],
   },
-  "castor-oil": {
+  "leafy-blend-castor-oil": {
     id: 2,
     name: "Leafy Blend Castor Oil",
     price: 599,
@@ -48,7 +48,7 @@ const products = {
       "Promotes eyebrow and eyelash growth",
     ],
   },
-  "coconut-oil": {
+  "leafy-blend-coconut-oil": {
     id: 3,
     name: "Leafy Blend Coconut Oil",
     price: 599,

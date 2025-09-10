@@ -85,7 +85,7 @@ export default function ProductsPage() {
                   Our <span className="text-primary">Natural Products</span>
                 </h1>
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  Discover our range of premium natural hair oils, crafted with the finest ingredients for healthy,
+                  Discover our range of natural hair oils, crafted with the finest ingredients for healthy,
                   beautiful hair.
                 </p>
               </div>
@@ -93,59 +93,61 @@ export default function ProductsPage() {
           </section>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
-            {products.map((product) => (
-              <div
-                key={product._id}
-                className="group flex flex-col bg-background border border-gray-200 aspect-square"
-              >
-                {/* Image Section */}
-                <div className="relative flex-grow p-6 flex items-center justify-center overflow-hidden">
-                  <img
-                    src={product.images[0] || "/placeholder.svg"}
-                    alt={product.name}
-                    className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {product.rating.average >= 4.8 && (
-                    <Badge
-                      variant="outline"
-                      className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-full"
-                    >
-                      TOP RATED
-                    </Badge>
-                  )}
-                </div>
+        {/* Products Grid */}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+  {products.map((product) => (
+    <div
+      key={product._id}
+      className="group flex flex-col bg-background border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+    >
+      {/* Image Section */}
+      <div className="relative h-64 flex items-center justify-center bg-white overflow-hidden">
+        <img
+          src={product.images[0] || "/placeholder.svg"}
+          alt={product.name}
+          className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+        />
+        {product.rating.average >= 4.8 && (
+          <Badge
+            variant="outline"
+            className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-full"
+          >
+            TOP RATED
+          </Badge>
+        )}
+      </div>
 
-                {/* Content Section */}
-                <div className="p-4 border-t border-gray-200">
-                  <h3 className="font-medium text-gray-800 truncate">{product.name}</h3>
-                  <p className="text-sm text-gray-500">{product.description}</p>
-                </div>
+      {/* Content Section */}
+      <div className="flex-grow p-4 border-t border-gray-200 text-center">
+        <h3 className="font-medium text-gray-800 truncate">{product.name}</h3>
+        <p className="text-sm text-gray-500 line-clamp-2">{product.description}</p>
+      </div>
 
-                {/* Action Section */}
-                <div className="p-4 border-t border-gray-200 col items-center justify-between gap-2">
-                  <span className="font-semibold text-lg text-gray-900">₹{product.price}</span>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => addToBag(product.name)}
-                      className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors rounded-none px-4"
-                    >
-                      ADD TO BAG
-                    </Button>
-                    <Button
-                      size="sm"
-                      onClick={() => showProduct(product.slug)}
-                      className="bg-gray-900 text-white hover:bg-gray-800 transition-colors rounded-none px-4"
-                    >
-                      SHOW PRODUCT
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Action Section */}
+      <div className="p-4 border-t border-gray-200 flex flex-col items-center gap-3">
+        <span className="font-semibold text-lg text-gray-900">₹{product.price}</span>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => addToBag(product.name)}
+            className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors rounded-lg px-4"
+          >
+            ADD TO BAG
+          </Button>
+          <Button
+            size="sm"
+            onClick={() => showProduct(product.slug)}
+            className="bg-gray-900 text-white hover:bg-gray-800 transition-colors rounded-lg px-4"
+          >
+            SHOW PRODUCT
+          </Button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
 
         
         </div>
