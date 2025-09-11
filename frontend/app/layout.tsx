@@ -7,6 +7,7 @@ import { Suspense } from "react"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import { Header } from "@/components/header"
+import { AuthProvider } from "@/context/authContext/context"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,9 +38,13 @@ export default function RootLayout({
       <body
         className={`font-sans ${inter.variable} ${playfair.variable} ${GeistMono.variable} ${GeistSans.variable}`}
       >
+        <AuthProvider>
         <Header/>
-        <Suspense fallback={null}>{children}</Suspense>
+        <Suspense fallback={null}>
+          {children}
+          </Suspense>
         <Toaster />
+        </AuthProvider>
       </body>
     </html>
   )

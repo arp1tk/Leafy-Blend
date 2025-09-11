@@ -13,41 +13,41 @@ export default function HomePage() {
     <div className="min-h-screen">
   
 
-  <section className="relative py-28 lg:py-36 xl:py-44">
+<section className="relative h-[60vh] md:h-[65vh] lg:h-[68vh] w-full flex items-center">
   {/* Background Image */}
   <Image
-    src="/hero1.png"
+    src="/hero.jpg"
     alt="Natural herbal hair oil background"
     fill
     priority
     className="object-cover object-center"
   />
 
-  {/* Subtle dark overlay */}
-  <div className="absolute inset-0 bg-black/15" />
+  {/* Subtle Overlay */}
+  <div className="absolute inset-0 bg-black/10" />
 
   {/* Content */}
   <div className="relative container mx-auto px-6 lg:px-8 xl:px-12">
-    <div className="max-w-3xl mx-auto text-center space-y-6">
+    <div className="max-w-2xl mx-auto text-center flex flex-col items-center justify-center h-full space-y-5">
       {/* Tagline */}
-      <span className="text-sm md:text-base tracking-wide uppercase text-[#394931] font-medium">
+      <span className="text-xs md:text-sm tracking-[0.15em] uppercase text-[#394931] font-medium">
         Pure · Herbal · Natural
       </span>
 
       {/* Title */}
-      <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#1a1f16]">
-        Nature’s Secret for<br />Beautiful Hair
+      <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.15] text-[#1a1f16]">
+        Nature’s Secret<br />for Beautiful Hair
       </h1>
 
       {/* Subtitle */}
-      <p className="text-lg md:text-xl text-black max-w-xl mx-auto leading-relaxed">
-        Premium herbal oils crafted from 100% natural ingredients.
+      <p className="text-sm md:text-base lg:text-lg text-[#333] max-w-md mx-auto leading-relaxed">
+        100% natural oils for healthy, shiny, and nourished hair.
       </p>
 
       {/* CTA Button */}
       <Button
         size="lg"
-        className="text-lg px-10 py-5 rounded-full font-medium bg-[#394931] hover:bg-[#394931]/90 transition-all"
+        className="mt-3 text-base px-10 py-4 rounded-full font-medium bg-[#394931] hover:bg-[#2f3b2b] transition-all shadow-md hover:shadow-lg"
         asChild
       >
         <Link href="/products">Shop Now</Link>
@@ -55,6 +55,8 @@ export default function HomePage() {
     </div>
   </div>
 </section>
+
+
 
 
 

@@ -1,14 +1,25 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Search, User, ShoppingCart, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import { useState } from "react"
+import { useAuth } from "@/context/authContext/context"
 
 export function Header() {
+  const { user, logout } = useAuth()
   const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   return (
@@ -18,14 +29,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="h-12 w-44 overflow-hidden flex items-center justify-center">
-              <Image
-                src="/logo.png"
-                alt="Leafy Blend Logo"
-                width={176}
-                height={48}
-                className="object-contain"
-                priority
-              />
+              <Image src="/logo.png" alt="Leafy Blend Logo" width={176} height={48} className="object-contain" priority />
             </div>
           </Link>
 
@@ -58,15 +62,40 @@ export function Header() {
             >
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
-              <User className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="relative hover:bg-gray-100 rounded-full">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[#394931] text-white text-xs flex items-center justify-center">
-                0
-              </span>
-            </Button>
+
+            {user ? (
+              <>
+                {/* User Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
+                      <User className="h-5 w-5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    <DropdownMenuLabel>
+                      Hello, {user?.name || "User"}
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Shopping Cart */}
+                <Button variant="ghost" size="icon" className="relative hover:bg-gray-100 rounded-full">
+                  <ShoppingCart className="h-5 w-5" />
+                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[#394931] text-white text-xs flex items-center justify-center">
+                    0
+                  </span>
+                </Button>
+              </>
+            ) : (
+              <Link href="/login">
+                <Button className="bg-[#394931] hover:bg-[#2f3b2b] text-white rounded-full px-5">
+                  Login
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu */}
@@ -76,10 +105,7 @@ export function Header() {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-[280px] sm:w-[340px] p-6 flex flex-col justify-between"
-            >
+            <SheetContent side="right" className="w-[280px] sm:w-[340px] p-6 flex flex-col justify-between">
               {/* Close Button */}
               <div className="flex justify-between items-center mb-6">
                 <Image src="/logo.png" alt="Leafy Blend" width={120} height={40} className="object-contain" />
@@ -109,15 +135,37 @@ export function Header() {
 
               {/* Bottom Icons */}
               <div className="flex items-center space-x-4 pt-6 border-t mt-6">
-                <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
-                  <User className="h-5 w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="relative hover:bg-gray-100 rounded-full">
-                  <ShoppingCart className="h-5 w-5" />
-                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[#394931] text-white text-xs flex items-center justify-center">
-                    0
-                  </span>
-                </Button>
+                {user ? (
+                  <>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
+                          <User className="h-5 w-5" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-48">
+                        <DropdownMenuLabel>
+                          Hello, {user?.name || "User"}
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    <Button variant="ghost" size="icon" className="relative hover:bg-gray-100 rounded-full">
+                      <ShoppingCart className="h-5 w-5" />
+                      <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[#394931] text-white text-xs flex items-center justify-center">
+                        0
+                      </span>
+                    </Button>
+                  </>
+                ) : (
+                  <Link href="/login" className="w-full">
+                    <Button className="bg-[#394931] hover:bg-[#2f3b2b] text-white rounded-full w-full">
+                      Login
+                    </Button>
+                  </Link>
+                )}
               </div>
             </SheetContent>
           </Sheet>
