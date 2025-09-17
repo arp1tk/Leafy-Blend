@@ -14,12 +14,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
+import { useCart } from "@/context/cartContext/context"
 import { useState } from "react"
 import { useAuth } from "@/context/authContext/context"
 
 export function Header() {
   const { user, logout } = useAuth()
+    const { cartItems } = useCart();
+  const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0);
   const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   return (
@@ -82,12 +84,19 @@ export function Header() {
                 </DropdownMenu>
 
                 {/* Shopping Cart */}
-                <Button variant="ghost" size="icon" className="relative hover:bg-gray-100 rounded-full">
-                  <ShoppingCart className="h-5 w-5" />
-                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[#394931] text-white text-xs flex items-center justify-center">
-                    0
-                  </span>
-                </Button>
+              <Button
+  asChild
+  variant="ghost"
+  size="icon"
+  className="relative hover:bg-gray-100 rounded-full"
+>
+  <Link href="/cart">
+    <ShoppingCart className="h-5 w-5" />
+    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[#394931] text-white text-xs flex items-center justify-center">
+      {cartCount}
+    </span>
+  </Link>
+</Button>
               </>
             ) : (
               <Link href="/login">

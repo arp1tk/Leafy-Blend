@@ -8,6 +8,7 @@ import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import { Header } from "@/components/header"
 import { AuthProvider } from "@/context/authContext/context"
+import { CartProvider } from "@/context/cartContext/context"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   title: "Leafy Blend - Natural Vegan Hair Care",
   description:
     "Rediscover your hair's natural strength with Leafy Blend's all-natural, vegan hair oils. 100% natural, eco-friendly, and results-oriented.",
-  generator: "v0.app",
+  
 }
 
 export default function RootLayout({
@@ -39,11 +40,13 @@ export default function RootLayout({
         className={`font-sans ${inter.variable} ${playfair.variable} ${GeistMono.variable} ${GeistSans.variable}`}
       >
         <AuthProvider>
+          <CartProvider>
         <Header/>
         <Suspense fallback={null}>
           {children}
           </Suspense>
         <Toaster />
+        </CartProvider>
         </AuthProvider>
       </body>
     </html>

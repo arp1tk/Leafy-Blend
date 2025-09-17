@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import { useCart } from "@/context/cartContext/context"
 
-// Define a type for our product for better type-safety
+
 type Product = {
   _id: string
   name: string
@@ -27,7 +28,7 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-
+const {addToCart} = useCart();
   // Fetch products from the API when the component mounts
   useEffect(() => {
     const fetchProducts = async () => {
@@ -124,26 +125,34 @@ export default function ProductsPage() {
       </div>
 
       {/* Action Section */}
-      <div className="p-4 border-t border-gray-200 flex flex-col items-center gap-3">
-        <span className="font-semibold text-lg text-gray-900">₹{product.price}</span>
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => addToBag(product.name)}
-            className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors rounded-lg px-4"
-          >
-            ADD TO BAG
-          </Button>
-          <Button
-            size="sm"
-            onClick={() => showProduct(product.slug)}
-            className="bg-gray-900 text-white hover:bg-gray-800 transition-colors rounded-lg px-4"
-          >
-            SHOW PRODUCT
-          </Button>
+     <div className="p-4 border-t border-gray-200 flex flex-col items-center gap-3">
+          <span className="font-semibold text-lg text-gray-900">₹{product.price}</span>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+    addToCart({
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0]?.trim() || "/placeholder.svg",
+    })
+    toast.success(`${product.name} added to your bag!`) 
+  }}
+              className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors rounded-lg px-4"
+            >
+              ADD TO BAG
+            </Button>
+            <Button
+              size="sm"
+              onClick={() => showProduct(product.slug)}
+              className="bg-gray-900 text-white hover:bg-gray-800 transition-colors rounded-lg px-4"
+            >
+              SHOW PRODUCT
+            </Button>
+          </div>
         </div>
-      </div>
     </div>
   ))}
 </div>
